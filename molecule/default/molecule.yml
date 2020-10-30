@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint -s .
+  ansible-lint -v main.yaml molecule/default/*
+platforms:
+  - name: centos8-apache-test
+    #  Get container to run systemd
+    image: geerlingguy/docker-centos8-ansible:latest
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    #  Get container to run systemd
+    pre_build_image: true
+  - name: debian10-apache-test
+    #  Get container to run systemd
+    image: geerlingguy/docker-debian10-ansible:latest
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    #  Get container to run systemd
+    pre_build_image: true
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
