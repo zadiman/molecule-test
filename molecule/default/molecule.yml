@@ -6,7 +6,7 @@ driver:
 lint: |
   set -e
   yamllint -s .
-  ansible-lint -v main.yaml molecule/default/*
+  ansible-lint -v main.yaml
 platforms:
   - name: centos8-apache-test
     #  Get container to run systemd
