@@ -27,7 +27,7 @@
         name: "{{ apache_package }}"
         state: present
 
-    - name: Copy a wbe page.
+    - name: Copy a web page.
       copy:
         content: |
           <html>
@@ -35,6 +35,7 @@
           <body>Hello World!</body>
           </html>
         dest: "/var/www/html/index.html"
+        mode: 0644
       notify: restart_apache2
 
     - name: Ensure Apache is running and starts at boot.
